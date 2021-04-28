@@ -25,6 +25,8 @@ class Sliderize {
 
     this.setGutter(gutter)
 
+
+    
     // slidelength is an item width + a gutter
     this.slideLength = itemWidth + gutter;
 
