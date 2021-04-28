@@ -18,17 +18,18 @@ resize event listener.
 */
 
 class Sliderize {
-  constructor(sliderDiv, gutter, itemWidth, ){
-
-    this.sliderDiv = sliderDiv
+  constructor(sliderDiv, gutter, itemWidth, mainSlideWidth){
+    this.sliderDiv   = sliderDiv
     this.sliderItems = Array.from(sliderDiv.children)   
-    this.combinedLength = (170 * this.sliderItems.length) + (16 * this.sliderItems.length - 1)
+    this.activeImgIndex = Math.floor(this.sliderItems.length / 2);
+
+    this.setGutter(gutter)
 
     // slidelength is an item width + a gutter
-    this.slideLength = 186;
+    this.slideLength = itemWidth + gutter;
 
-    //incoming slidelength is a width + a gutter + the diff between a slide and a main slide
-    this.incomingSlideLength = 286 
+    // incoming slidelength is a width + a gutter + the diff between a slide and a main slide
+    this.incomingSlideLength = itemWidth + gutter + ((mainSlideWidth - itemWidth) / 2) 
 
     this.offset =  
       // half the container's width
@@ -39,10 +40,11 @@ class Sliderize {
       - this.incomingSlideLength
       
     // Make the middle image active on start
-    this.activeImgIndex = Math.floor(this.sliderItems.length / 2);
+    
 
-    // get the active image from []this.slideItems
+    // get the active image from this.slideItems
     this.activeImg = Array.from(sliderDiv.children)[this.activeImgIndex]
+    console.log(this.activeImg)
 
     // Applying the starting offset (this.offset) to all elements
     Array.from(sliderDiv.children).forEach(element => {
@@ -57,6 +59,10 @@ class Sliderize {
     this.activeImg.classList.add('active-img')
   }
 
+
+  setGutter(gutter){ 
+    this.sliderDiv.style.gap = gutter + 'px'
+  }
 
   goForward(){
     // decrease offset by slidelength
@@ -104,5 +110,4 @@ class Sliderize {
 
 //Get slider container
 const sliderDiv = document.getElementsByClassName('custom-product-slider')[0] 
-const slider = new Sliderize(sliderDiv)
-// setInterval(()=>slider.goForward(), 300)
+const slider = new Sliderize(sliderDiv, 46, 170, 370)
