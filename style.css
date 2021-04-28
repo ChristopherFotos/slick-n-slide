@@ -1,0 +1,61 @@
+.container {
+  padding-top: 20vh;
+}
+
+/* =======================
+        Slider container
+  ============================ */
+
+.custom-product-slider {
+  width: 100vw;
+  height: 269px;
+}
+/* NOTE: The root div has different padding at different breakpoints, 
+  which means we need different media queries to adjust the left 
+  property at each breakpoint so that it's up against the edge 
+  of the screen instead of being pushed to the right by the padding.*/
+@media only screen and (min-width: 900px) {
+  .custom-product-slider {
+    background-color: #ffeff0;
+    /* position: relative; */
+    /* left: -20px; */
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    gap: 16px;
+  }
+}
+
+@media only screen and (min-width: 1023px) {
+  .custom-product-slider {
+    left: -20px;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .custom-product-slider {
+    left: -48px;
+  }
+}
+/* ===============================
+        Individual slider items
+  ================================== */
+.custom-product-slider__item {
+  width: 170px;
+  height: 170px;
+  left: 0px;
+  object-fit: cover;
+  border-radius: 10px;
+  position: relative;
+  background: rgba(31, 35, 44, 0.5);
+  transition: all 0.6s;
+  transform: translateX(-50%);
+}
+/* ===============
+   CSS animations 
+   ================*/
+
+.active-img {
+  width: 370px;
+  height: 370px;
+}

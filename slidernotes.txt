@@ -1,0 +1,24 @@
+the width of the small squares
+the height of the small squares
+
+the width of the large square
+the height of the large square
+
+
+the square that's becoming active must move to the center of the active square
+the squares that are not becoming active must move over by their own width + the width of the gutter
+
+incoming element must move its own width + the gutter width + (mainImgWidth - smallImgWidth)
+shifting elements must move their own width + the gutter width
+
+if the gutter between the main img and its neighbors is different, use that gutter for allof them
+
+CENTERING
+one possible way to center it: add up all the elements' widths, all the gutters, subtract 
+that figureit from the container's width, and then divide that by 2, and then that's 
+the original offset.  
+
+or just take the main element's width, subtract it from the container's width, and then 
+divide that by 2, then subtract half the main element's width, and then that's the original offset. 
+This is better because main will always be in center,
+even with an even number of items. 
