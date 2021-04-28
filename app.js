@@ -18,17 +18,16 @@ resize event listener.
 */
 
 class Sliderize {
-  constructor(sliderDiv, gutter, itemWidth, ){
+  constructor(sliderDiv, gutter, itemWidth, mainSlideWidth){
 
     this.sliderDiv = sliderDiv
     this.sliderItems = Array.from(sliderDiv.children)   
-    this.combinedLength = (170 * this.sliderItems.length) + (16 * this.sliderItems.length - 1)
 
     // slidelength is an item width + a gutter
-    this.slideLength = 186;
+    this.slideLength = itemWidth + gutter;
 
     //incoming slidelength is a width + a gutter + the diff between a slide and a main slide
-    this.incomingSlideLength = 286 
+    this.incomingSlideLength = itemWidth + gutter + ((mainSlideWidth - itemWidth) / 2) 
 
     this.offset =  
       // half the container's width
@@ -57,6 +56,11 @@ class Sliderize {
     this.activeImg.classList.add('active-img')
   }
 
+  setInitialStyles(gutter, itemWidth, mainSlideWidth){
+    console.log()
+    console.log()
+    console.log()
+  }
 
   goForward(){
     // decrease offset by slidelength
@@ -104,5 +108,5 @@ class Sliderize {
 
 //Get slider container
 const sliderDiv = document.getElementsByClassName('custom-product-slider')[0] 
-const slider = new Sliderize(sliderDiv)
+const slider = new Sliderize(sliderDiv, 16, 170, 370)
 // setInterval(()=>slider.goForward(), 300)
