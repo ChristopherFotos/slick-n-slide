@@ -5,6 +5,11 @@ TODO:
 constructor. This should include the gutter width, the main slide's width, 
 and the regular slide's width. Those values should be applied to the elements
 in the constructor function. 
+    - decided not to set values in the constructor. Only made gutters dynamic. 
+    more trouble than it was worth, required a lot of changes 
+    to the current implementation. user can simply tell the 
+    slider what the values are. As it is, the user can change the widths to be whatever
+    they want in css, as long as they pass that value into the constructor.
 
 2. Ensure that the user can't go past the end of the slide show
 
@@ -25,23 +30,32 @@ class Sliderize {
 
     this.setGutter(gutter)
 
-
-    
     // slidelength is an item width + a gutter
     this.slideLength = itemWidth + gutter;
 
     // incoming slidelength is a width + a gutter + the diff between a slide and a main slide
     this.incomingSlideLength = itemWidth + gutter + ((mainSlideWidth - itemWidth) / 2) 
 
+
+    /*============================
+          OFFSET LOGIC START
+          extract this logic 
+          into a method and 
+          run that mathod 
+          between these comments
+    ==============================*/
+
     this.offset =  
       // half the container's width
       parseInt(getComputedStyle(sliderDiv).getPropertyValue('width').split('p')[0]) / 2 
-      // minus one slidelength * half the number of imgs
+      // minus one slidelength * half the number of imgs 
       - (this.slideLength * Math.floor(this.sliderItems.length / 2 - 1)) 
       // minus an incoming slidelength
       - this.incomingSlideLength
       
-    // Make the middle image active on start
+    /*============================
+          OFFSET LOGIC END
+    ==============================*/
     
 
     // get the active image from this.slideItems
@@ -67,6 +81,9 @@ class Sliderize {
   }
 
   goForward(){
+    // return if we've already reached end of the slides
+    if(this.activeImgIndex === this.sliderItems.length - 1) return
+
     // decrease offset by slidelength
     this.offset -= this.slideLength
 
@@ -91,6 +108,9 @@ class Sliderize {
   }
 
   goBackward(){
+    // return if 
+    if(this.activeImgIndex === 0) return
+
     this.offset += this.slideLength
 
     this.sliderItems.forEach((item, i) => {
@@ -112,4 +132,4 @@ class Sliderize {
 
 //Get slider container
 const sliderDiv = document.getElementsByClassName('custom-product-slider')[0] 
-const slider = new Sliderize(sliderDiv, 46, 170, 370)
+const slider = new Sliderize(sliderDiv, 86, 170, 370)
