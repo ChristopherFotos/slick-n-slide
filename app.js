@@ -11,8 +11,6 @@ in the constructor function.
     slider what the values are. As it is, the user can change the widths to be whatever
     they want in css, as long as they pass that value into the constructor.
 
-2. Ensure that the user can't go past the end of the slide show
-
 3. arrow buttons
 
 4. making the overflow visible. maybe just an SVG background.
@@ -36,45 +34,43 @@ class Sliderize {
     // incoming slidelength is a width + a gutter + the diff between a slide and a main slide
     this.incomingSlideLength = itemWidth + gutter + ((mainSlideWidth - itemWidth) / 2) 
 
-
-    /*============================
-          OFFSET LOGIC START
-          extract this logic 
-          into a method and 
-          run that mathod 
-          between these comments
-    ==============================*/
-
-    this.offset =  
-      // half the container's width
-      parseInt(getComputedStyle(sliderDiv).getPropertyValue('width').split('p')[0]) / 2 
-      // minus one slidelength * half the number of imgs 
-      - (this.slideLength * Math.floor(this.sliderItems.length / 2 - 1)) 
-      // minus an incoming slidelength
-      - this.incomingSlideLength
-      
-    /*============================
-          OFFSET LOGIC END
-    ==============================*/
+    this.setOffset()
+    this.setActiveImg()
+    this.applyOffset()
     
-
-    // get the active image from this.slideItems
-    this.activeImg = Array.from(sliderDiv.children)[this.activeImgIndex]
-    console.log(this.activeImg)
-
-    // Applying the starting offset (this.offset) to all elements
-    Array.from(sliderDiv.children).forEach(element => {
-      element.style.left = this.offset + 'px';
+    // set everything back to default state on window resize. If not, things get messed up. 
+    window.addEventListener('resize', ()=>{
+      this.setOffset();
+      this.applyOffset()
+      this.activeImgIndex = Math.floor(this.sliderItems.length / 2);
+      this.activeImg.classList.remove('active-img')
+      this.setActiveImg()
     })
-    
-    /* The active slide needs to start with a left property equal to  (the diff in 
-    width between an active slide and a regular slide) + the starting offset */
-    Array.from(sliderDiv.children)[this.activeImgIndex].style.left = this.offset + 100 + 'px'
-
-    // Adding the active-img class to an img makes it larger
-    this.activeImg.classList.add('active-img')
   }
 
+  setOffset(){
+    console.log('setting offset')
+    this.offset =  
+    // half the container's width
+    parseInt(getComputedStyle(sliderDiv).getPropertyValue('width').split('p')[0]) / 2 
+    // minus one slidelength * half the number of imgs 
+    - (this.slideLength * Math.floor(this.sliderItems.length / 2 - 1)) 
+    // minus an incoming slidelength
+    - this.incomingSlideLength
+  }
+
+  applyOffset(){
+    Array.from(sliderDiv.children).forEach(element => {
+      element.style.left = this.offset + 'px';
+      Array.from(sliderDiv.children)[this.activeImgIndex].style.left = this.offset + 100 + 'px'
+    })
+  }
+
+  setActiveImg(){
+    this.activeImg = Array.from(sliderDiv.children)[this.activeImgIndex]
+    this.activeImg.classList.add('active-img')
+    console.log(this.activeImg)
+  }
 
   setGutter(gutter){ 
     this.sliderDiv.style.gap = gutter + 'px'
@@ -103,12 +99,10 @@ class Sliderize {
     class to that img. */
     this.activeImgIndex ++
     this.activeImg.classList.remove('active-img')
-    this.activeImg = Array.from(sliderDiv.children)[this.activeImgIndex]
-    this.activeImg.classList.add('active-img')
+    this.setActiveImg()
   }
 
   goBackward(){
-    // return if 
     if(this.activeImgIndex === 0) return
 
     this.offset += this.slideLength
@@ -124,8 +118,7 @@ class Sliderize {
 
     this.activeImgIndex --
     this.activeImg.classList.remove('active-img')
-    this.activeImg = Array.from(sliderDiv.children)[this.activeImgIndex]
-    this.activeImg.classList.add('active-img')
+    this.setActiveImg()
   }
 
 }
