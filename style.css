@@ -20,6 +20,7 @@
     /* position: relative; */
     /* left: -20px; */
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     overflow-x: hidden;
     overflow-y: hidden;
