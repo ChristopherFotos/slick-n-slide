@@ -10,6 +10,7 @@ class Sliderize {
     this.sliderItems = Array.from(sliderDiv.getElementsByClassName('custom-product-slider__item'))   
     this.activeImgIndex = Math.floor(this.sliderItems.length / 2);
     this.mainSlideWidth = mainSlideWidth
+    this.itemWidth = itemWidth
 
     this.backButton = sliderDiv.getElementsByClassName('custom-slider__back')[0]
     this.forwardButton = sliderDiv.getElementsByClassName('custom-slider__forward')[0]
@@ -45,10 +46,6 @@ class Sliderize {
     this.backButton.addEventListener('click', ()=>this.goBackward())
     this.forwardButton.addEventListener('click', ()=>this.goForward())
 
-    this.backButton.style.width = '50px'
-    this.forwardButton.style.width = '50px'
-    this.backButton.style.height = '50px'
-    this.forwardButton.style.height = '50px'
     this.forwardButton.style.position = 'absolute'
     this.backButton.style.position = 'absolute'
     this.forwardButton.style.zIndex = '2'
@@ -68,15 +65,18 @@ class Sliderize {
 
     //${this.activeImg.getBoundingClientRect().left - 5}
 
-    this.backButton.style.left = `${this.sliderDiv.getBoundingClientRect().width/2 - (this.mainSlideWidth/1.65)}px`
-    this.forwardButton.style.left = `${this.sliderDiv.getBoundingClientRect().width/2 + (this.mainSlideWidth/2.3)}px`
-    console.log(this.forwardButton.style.left )
+    this.backButton.style.left = `
+      ${this.sliderDiv.getBoundingClientRect().width/2 - (this.mainSlideWidth/2 + 60)}px`
+
+    this.forwardButton.style.left = `
+      ${this.sliderDiv.getBoundingClientRect().width/2 + (this.mainSlideWidth/2 - 20)}px`
+
   }
 
   applyOffset(){
     this.sliderItems.forEach(element => {
       element.style.left = this.offset + 'px';
-      this.sliderItems[this.activeImgIndex].style.left = this.offset + 100 + 'px'
+      this.sliderItems[this.activeImgIndex].style.left = this.offset + (this.mainSlideWidth - this.itemWidth) + 'px'
     })
   }
 
@@ -100,7 +100,7 @@ class Sliderize {
     // change each element's left property to equal the new offset
     this.sliderItems.forEach((item, i) => {
       if(i === this.activeImgIndex + 1){
-        item.style.left = (this.offset + 100) + 'px'
+        item.style.left = (this.offset + (this.mainSlideWidth - this.itemWidth)) + 'px'
         return
       }
 
@@ -124,7 +124,7 @@ class Sliderize {
 
     this.sliderItems.forEach((item, i) => {
       if(i === this.activeImgIndex - 1){
-        item.style.left = (this.offset + 100) + 'px'
+        item.style.left = (this.offset + (this.mainSlideWidth - this.itemWidth)) + 'px'
         return
       }
       
@@ -140,4 +140,4 @@ class Sliderize {
 
 // Initialize slider
 const sliderDiv = document.getElementsByClassName('custom-product-slider')[0] 
-const slider = new Sliderize(sliderDiv, 86, 170, 404)
+const slider = new Sliderize(sliderDiv, 86, 170, 170)
