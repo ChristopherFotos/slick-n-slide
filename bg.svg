@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 1025 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1,0,0,1,2.35997,-224.491)">
-        <g transform="matrix(8.53631,0,0,1,-3587.61,44.4911)">
+<svg width="100%" height="100%" viewBox="0 0 1028 197" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,3.2452,-146.681)">
+        <g transform="matrix(8.53631,0,0,0.181906,-3585.25,113.938)">
+            <rect x="420" y="180" width="120" height="140" style="fill:white;"/>
+        </g>
+        <g transform="matrix(8.53631,0,0,0.177974,-3588.5,285.934)">
+            <rect x="420" y="180" width="120" height="140" style="fill:white;"/>
+        </g>
+        <g transform="matrix(8.53631,0,0,1.04159,-3588.5,-15.3376)">
             <rect x="420" y="180" width="120" height="140" style="fill:rgb(255,239,240);"/>
         </g>
     </g>
