@@ -47,6 +47,7 @@ class Sliderize {
 		this.forwardButton.style.zIndex = '2';
 		this.backButton.style.zIndex = '2';
 	}
+	// superficial comment
 
 	// Center elements
 	setOffset() {
